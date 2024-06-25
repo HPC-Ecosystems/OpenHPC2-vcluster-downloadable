@@ -10,6 +10,10 @@ Compute Nodes (Laptop 2 and Laptop 3): These are like the workers. They handle t
 
 So, when all three laptops (one login node and two compute nodes) are connected and working together, they form a cluster that can handle larger and more complex tasks than any single laptop could on its own.
 
+# Reference Notes
+
+https://carpentries-incubator.github.io/hpc-intro/10-hpc-intro/index.html
+
 # In-depth Virtual Cluster Install
 
 For an in-depth install and explanation follow:
