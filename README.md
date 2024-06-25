@@ -1,10 +1,10 @@
-# Setup Virtual Cluster
+# In-depth Virtual Cluster Install
 
 For an in-depth install and explanation follow:
 
 https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
 
-# Quick Install
+# Quick Virtual Cluster Install
 
 ## Software Install:
 1. Install VirtualBox
