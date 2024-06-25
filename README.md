@@ -12,6 +12,8 @@ So, when all three laptops (one login node and two compute nodes) are connected 
 
 # Reference Notes
 
+We will be using these notes to test out the virtual cluster:
+
 https://carpentries-incubator.github.io/hpc-intro/10-hpc-intro/index.html
 
 # In-depth Virtual Cluster Install
