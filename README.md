@@ -1,3 +1,15 @@
+# What is a cluster?
+
+A cluster is like a team of computers or laptops that work together to accomplish tasks more efficiently than they could individually. Imagine you have a big project that would take a long time if you did it alone. If you gather a group of friends and each person works on a part of the project, you can get it done much faster. This is similar to how a cluster works: each computer, or node, in the cluster takes on part of the workload, and together they complete the task more quickly.
+
+In your case, you're building a virtual cluster with three laptops:
+
+Login Node (Latop 1): This is like the team leader or the coordinator. It's where you log in to give commands and manage the cluster. It doesn't do much heavy lifting but is crucial for organizing the tasks.
+
+Compute Nodes (Laptop 2 and Laptop 3): These are like the workers. They handle the actual processing and computation. When you give a command to the login node, it distributes the work to these compute nodes. These compute nodes, we will call them compute00 and compute01.
+
+So, when all three laptops (one login node and two compute nodes) are connected and working together, they form a cluster that can handle larger and more complex tasks than any single laptop could on its own.
+
 # In-depth Virtual Cluster Install
 
 For an in-depth install and explanation follow:
@@ -13,9 +25,10 @@ https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
 
 ## Setup 
 
-What you will be building:
+What you will be building
 
-![image](https://github.com/ChpcTraining/hpc_carpentry/assets/157092105/1c46431b-7fac-41a4-9206-283641a45bce)
+![image](https://github.com/HPC-Ecosystems/OpenHPC2-vcluster-downloadable/assets/157092105/546a11c8-372c-4950-bc28-509d52a1f056)
+
 
 ### Steps
 
