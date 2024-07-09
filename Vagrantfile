@@ -53,6 +53,12 @@ Vagrant.configure("2") do |config|
 
     end
 
+    #installs
+    smshost.vm.provision "shell" do |s|
+      s.inline = "sudo dnf install nano -y"
+      end
+
+
 #    smshost.vm.provision "shell" do |s|
 #      s.inline = "sudo yum install vim git tmux -y; sed -i '/smshost/d' /etc/hosts"
 #      end
