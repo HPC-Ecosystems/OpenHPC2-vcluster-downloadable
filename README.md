@@ -18,7 +18,7 @@ https://carpentries-incubator.github.io/hpc-intro/10-hpc-intro/index.html
 
 # In-depth Virtual Cluster Install
 
-For an in-depth install and explanation follow:
+For an in-depth hands-on guide for deploying the **OpenHPC2.x virtual lab** yourself from scratch, please refer to the official guide:  
 
 https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
 
