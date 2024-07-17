@@ -49,10 +49,11 @@ cd openhpc-2.x-virtual-lab
 ```
 5. `cd openhpc-2.x-virtual-lab`
 6. Delete the existing Vagrant file with `rm Vargrantfile`
-7. Download the [pre-packaged Vagrant `box` and `Vagrantfile`](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) to the `vcluster` folder
+7. Download the [pre-packaged Vagrant box and Vagrantfile](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) to the `vcluster` folder
 - `package.box`  
 - `packaged-openhpc2-smshost.box`  
-- `Vagrantfile`  
+- `Vagrantfile`
+- *NOTE: If a password is required, please use `ohpc2template`*
 
 8. Add the pre-built Vagrant box to the Vagrant environment
 
