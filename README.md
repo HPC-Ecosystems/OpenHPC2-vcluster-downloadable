@@ -69,6 +69,7 @@ cd openhpc-2.x-virtual-lab
 ```
 /vcluster/ vagrant up smshost
 ```
+* HINT: This should show a virtual machine in the VirtualBox GUI with the name `smshost_vcluster`*
 
 10. Now start first compute node 0:
 
