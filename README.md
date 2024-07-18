@@ -38,22 +38,25 @@ What you will be building
 
 ### Steps
 
-1 Open gitbash and go to your desired projects/documents folder
+1. Open gitbash and go to your desired projects/documents folder
 
-2. Create a directory called `mkdir vcluster` to store your virtual cluster files
-3. ```cd vcluster```
-4. Clone the repo
+2. Create a directory called `vcluster` to store your virtual cluster files.  
+3. Navigate into the newly created directory `vcluster`.  
+5. Clone the repository to the `vcluster` directory.  
+
 ```
 git clone https://gitlab.com/hpc-ecosystems/training/openhpc-2.x-virtual-lab.git 
 cd openhpc-2.x-virtual-lab
 ```
+
 5. `cd openhpc-2.x-virtual-lab`
-6. Delete the existing Vagrant file with `rm Vargrantfile`
+6. Delete the existing Vagrant file with `rm Vagrantfile`
 7. Download the [pre-packaged Vagrant box and Vagrantfile](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) to the `vcluster` folder
-- `package.box`  
-- `packaged-openhpc2-smshost.box`  
-- `Vagrantfile`
-- *NOTE: If a password is required, please use `ohpc2template`*
+  - `package.box`  
+  - `packaged-openhpc2-smshost.box`  
+  - `Vagrantfile`
+  - *NOTE: If a password is required, please use `ohpc2template`*
+  - *HINT: You can download the pre-packaged `.box` file to another location if you intend to build multiple machines from the packaged box*
 
 8. Add the pre-built Vagrant box to the Vagrant environment
 
