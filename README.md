@@ -58,13 +58,13 @@ cd openhpc-2.x-virtual-lab
   - *NOTE: If a password is required, please use `ohpc2template`*
   - *HINT: You can download the pre-packaged `.box` file to another location if you intend to build multiple machines from the packaged box*
 
-8. Add the pre-built Vagrant box to the Vagrant environment
+8. Add the pre-built Vagrant box to the Vagrant environment using a syntax similar to `vagrant box add my-box file:///c:/path/to/my-box.box` or as a relative path such as `file://my-box.box.`
 
 ```
-/vcluster/ vagrant box add openhpc/ohpc2 file:/packaged-openhpc2-smshost.box
+/vcluster/ vagrant box add openhpc/ohpc2 file://packaged-openhpc2-smshost.box
 ```
 
-9. Once complete start the login node:
+9. Once complete (`==> box: Successfully added box 'openhpc/ohpc2' (v0) for 'virtualbox'!`) start the **login** node (referred to as the *smshost*):
 
 ```
 /vcluster/ vagrant up smshost
