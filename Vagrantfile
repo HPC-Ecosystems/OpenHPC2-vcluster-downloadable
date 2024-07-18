@@ -1,10 +1,9 @@
 ##############
-# PACKAGED OPENHPC2 SMSHOST for experiments
-####### 20231011
-###
-# OpenOnDemand Run3
+# PACKAGED OpenHPC2.x smshost for local virtual cluster
 #
-# https://docs.google.com/document/d/1FIAyYXgKpEq41Jt69w0Aq4KeiAWg5_YgxjOXYy0HNKc/edit
+### 20240718 bj
+#
+# Localised Dev. Cluster
 #
 ###
 
@@ -31,7 +30,8 @@ Vagrant.configure("2") do |config|
     config.vm.define "smshost", primary: true do |smshost|
 
 #    smshost.vm.box = "bento/rockylinux-8"
-    smshost.vm.box = "packaged-openhpc2-smshost.box"
+    #smshost.vm.box = "packaged-openhpc2-smshost.box"
+	smshost.vm.box = "openhpc/ohpc2"
 #    smshost.vm.box_version = "202212.11.0" 
     smshost.vm.hostname = "smshost"
 
@@ -46,18 +46,12 @@ Vagrant.configure("2") do |config|
 
     smshost.vm.provider "virtualbox" do |vb|
     
-      vb.name = "smshost_ood"
+      vb.name = "smshost_vcluster"
       vb.cpus = 2
       vb.memory = "1024"
       vb.gui = false
 
     end
-
-    #installs
-    smshost.vm.provision "shell" do |s|
-      s.inline = "sudo dnf install nano -y"
-      end
-
 
 #    smshost.vm.provision "shell" do |s|
 #      s.inline = "sudo yum install vim git tmux -y; sed -i '/smshost/d' /etc/hosts"
@@ -74,7 +68,7 @@ Vagrant.configure("2") do |config|
 
     compute00.vm.provider "virtualbox" do |vb|
     
-      vb.name = "compute00_ood"
+      vb.name = "compute00_vcluster"
       vb.cpus = 2
       vb.memory = "3072"
       vb.gui = false
@@ -92,7 +86,7 @@ Vagrant.configure("2") do |config|
 
     compute01.vm.provider "virtualbox" do |vb|
     
-      vb.name = "commpute01_ood"
+      vb.name = "commpute01_vcluster"
       vb.cpus = 2
       vb.memory = "3072"
       vb.gui = false
