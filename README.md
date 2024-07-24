@@ -18,7 +18,7 @@ https://carpentries-incubator.github.io/hpc-intro/10-hpc-intro/index.html
 
 # In-depth Virtual Cluster Install
 
-For an in-depth hands-on guide for deploying the **OpenHPC2.x virtual lab** yourself from scratch, please refer to the official guide:  
+If you would like to have an in-depth hands-on experience of deploying an **OpenHPC 2.x** cluster for yourself, there is a hands-on guide for deploying the **OpenHPC2.x virtual lab** yourself from scratch:  
 
 https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
 
@@ -95,7 +95,9 @@ PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 normal*      up 1-00:00:00      2  down* compute[00-01]
 ```
 
-Both nodes are down so `ssh` to both nodes as root and do:
+It will be likely that at this stage on first boot both compute nodes will be marked as down. This is to be expected from the virtual environment since the VMs have in effect been in a dormant state since their first original deployment many days/weeks/months ago. We need to restart the HPC services to resume normal HPC service.  
+
+`ssh` to both nodes as root and do:
 
 ```
 [root@smshost2 vagrant]# ssh compute00
