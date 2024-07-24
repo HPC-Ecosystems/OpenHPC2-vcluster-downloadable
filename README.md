@@ -120,7 +120,7 @@ In VirualBox you should see now:
 
 12. Test nodes:
 
-From `[vagrant@smshost2 vagrant]#`:
+From `[vagrant@smshost vagrant]#`:
 
 ```
 vagrant ssh smshost
