@@ -70,7 +70,9 @@ Vagrant.configure("2") do |config|
     compute00.vm.box = "file://./package.box"
     compute00.vm.hostname = "compute00"
     compute00.vm.network "private_network", :adapter=>1, ip: "10.10.10.100", mac: "080027F9F3B1", virtualbox__intnet: "hpcnet"
-    #compute00.vm.communicator = ""
+    
+	# a blank communicator breaks the vagrant reload capabilities so remove it instead
+	#compute00.vm.communicator = ""
 
     compute00.vm.provider "virtualbox" do |vb|
     
@@ -88,7 +90,9 @@ Vagrant.configure("2") do |config|
     compute01.vm.box = "file://./package.box"
     compute01.vm.hostname = "compute01"
     compute01.vm.network "private_network", :adapter=>1, ip: "10.10.10.101", mac: "080027F59A31", virtualbox__intnet: "hpcnet"
-    compute01.vm.communicator = ""
+	
+	# a blank communicator breaks the vagrant reload capabilities so remove it instead
+    #compute01.vm.communicator = ""
 
     compute01.vm.provider "virtualbox" do |vb|
     
