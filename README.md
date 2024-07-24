@@ -49,16 +49,42 @@ git clone https://gitlab.com/hpc-ecosystems/training/openhpc-2.x-virtual-lab.git
 cd openhpc-2.x-virtual-lab
 ```
 
-5. `cd openhpc-2.x-virtual-lab`
-6. Delete the existing Vagrant file with `rm Vagrantfile`
-7. Download the [pre-packaged Vagrant box and Vagrantfile](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) to the `vcluster` folder
-  - `package.box`  
-  - `openhpc2-smshost-20240724.box`  
-  - `Vagrantfile`
+5. `cd openhpc-2.x-virtual-lab`, if you do `ls` you should see the following files:
+
+```
+.gitignore
+client00.box
+compute-node.box
+input.local.lab
+openhpc-demo-client00.ova
+openhpc-demo-client01.ova
+README.md
+slurm.conf.lab
+Vagrantfile
+```
+
+7. Delete the existing `Vagrantfile` file with `rm Vagrantfile`, and download the new  `Vagrantfile` and the `package.box` from this repo and copy them to your local .../openhpc-2.x-virtual-lab/ folder
+8. Now go to this link [pre-packaged Vagrant box](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) and go to the folder: "OpenHPC2-vCluster files" and download "openhpc2-smshost-20240724.box". and copy it to your local .../openhpc-2.x-virtual-lab/ folder
   - *NOTE: If a password is required, please use `ohpc2template`*
   - *HINT: You can download the pre-packaged `.box` file to another location if you intend to build multiple machines from the packaged box*
 
-8. Add the pre-built Vagrant box to the Vagrant environment using a syntax similar to `vagrant box add my-box file:///c:/path/to/my-box.box` or as a relative path such as `file://my-box.box.`
+You should then end up with:
+
+```
+.gitignore
+client00.box
+compute-node.box
+input.local.lab
+openhpc-demo-client00.ova
+openhpc-demo-client01.ova
+openhpc2-smshost-20240724.box
+package.box
+README.md
+slurm.conf.lab
+Vagrantfile
+```
+
+8. Add the pre-built Vagrant box to the Vagrant environment using:
 
 From `...openhpc-2.x-virtual-lab/`:
 
