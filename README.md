@@ -87,6 +87,11 @@ Ignore `SSH private key issue`
 vagrant up compute01
 ```
 
+In VirualBox you should see now:
+
+![image](https://github.com/user-attachments/assets/4dbb6813-8f25-4cf9-ade4-0967b7442ae2)
+
+
 12. Test nodes:
 
 From `[vagrant@smshost2 vagrant]#`:
