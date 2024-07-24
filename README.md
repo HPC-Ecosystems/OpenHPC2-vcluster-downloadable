@@ -170,9 +170,9 @@ normal*      up 1-00:00:00      2   idle compute[00-01]
 
 The `STATE` should show `idle`.
 
-If the `STATE` shows anything else (usually the alternative state is `down`), then the compute nodes must be brought back to service:
+> If the `STATE` shows anything else (usually the alternative state is `down`), then the compute nodes must be brought back to service:
 
-`scontrol update nodename=compute0[0-1] state=resume`
+> `scontrol update nodename=compute0[0-1] state=resume`
 
 14. Lastly fix a small bug in `/etc/hosts` on login node:
 
