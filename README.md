@@ -49,7 +49,7 @@ git clone https://gitlab.com/hpc-ecosystems/training/openhpc-2.x-virtual-lab.git
 cd openhpc-2.x-virtual-lab
 ```
 
-5. `cd openhpc-2.x-virtual-lab`, if you do `ls` you should see the following files:
+5. If you do `ls` you should see the following files:
 
 ```
 .gitignore
@@ -97,6 +97,30 @@ vagrant box add openhpc/ohpc2 file://openhpc2-smshost-20240724.box
 ```
 vagrant up smshost
 ```
+
+You should see something like this:
+
+```
+Bringing machine 'smshost' up with 'virtualbox' provider...
+==> smshost: Importing base box 'openhpc/ohpc2'...
+==> smshost: Matching MAC address for NAT networking...
+==> smshost: Clearing any previously set network interfaces...
+==> smshost: Preparing network interfaces based on configuration...
+    smshost: Adapter 1: nat
+    smshost: Adapter 2: intnet
+    smshost: Adapter 3: hostonly
+==> smshost: Forwarding ports...
+    smshost: 22 (guest) => 2299 (host) (adapter 1)
+==> smshost: Running 'pre-boot' VM customizations...
+==> smshost: Booting VM...
+==> smshost: Waiting for machine to boot. This may take a few minutes...
+    smshost: SSH address: 127.0.0.1:2299
+    smshost: SSH username: vagrant
+    smshost: SSH auth method: private key
+==> smshost: Machine booted and ready!
+...
+```
+
 * HINT: This should show a virtual machine in the VirtualBox GUI with the name `smshost_vcluster`*
 
 10. Now start first compute node 0:
@@ -105,12 +129,54 @@ vagrant up smshost
 vagrant up compute00
 ```
 
-Ignore `SSH private key issue`
+You should see something like this:
+
+```
+Bringing machine 'compute00' up with 'virtualbox' provider...
+==> compute00: Importing base box 'file://./package.box'...
+==> compute00: Matching MAC address for NAT networking...
+==> compute00: Setting the name of the VM: compute00_vcluster_20240724
+==> compute00: Preparing network interfaces based on configuration...
+    compute00: Adapter 1: intnet
+==> compute00: Forwarding ports...
+    compute00: 22 (guest) => 2222 (host) (adapter 1)
+    compute00: VirtualBox adapter #1 not configured as "NAT". Skipping port
+    compute00: forwards on this adapter.
+==> compute00: Running 'pre-boot' VM customizations...
+==> compute00: Booting VM...
+...
+...
+...
+If the box appears to be booting properly, you may want to increase
+the timeout ("config.vm.boot_timeout") value.
+```
 
 11. Now start second compute node 1:
 
 ```
 vagrant up compute01
+```
+
+You should see something like this:
+
+```
+Bringing machine 'compute01' up with 'virtualbox' provider...
+==> compute01: Importing base box 'file://./package.box'...
+==> compute01: Matching MAC address for NAT networking...
+==> compute01: Setting the name of the VM: compute01_vcluster_20240724
+==> compute01: Preparing network interfaces based on configuration...
+    compute01: Adapter 1: intnet
+==> compute01: Forwarding ports...
+    compute01: 22 (guest) => 2222 (host) (adapter 1)
+    compute01: VirtualBox adapter #1 not configured as "NAT". Skipping port
+    compute01: forwards on this adapter.
+==> compute01: Running 'pre-boot' VM customizations...
+==> compute01: Booting VM...
+...
+...
+...
+If the box appears to be booting properly, you may want to increase
+the timeout ("config.vm.boot_timeout") value.
 ```
 
 In VirualBox you should see now:
@@ -149,7 +215,7 @@ It will be likely that at this stage on first boot both compute nodes will be ma
 
 The following steps will remove an errant entry that reappears in the compute node DNS entries that will not be needed for this lab, and then restarts the Slurm workload manager.
 
-*HINT: There is a script ***cluster_up.sh*** supplied in /vagrant/ that can be used for this process*
+*HINT: There is a script ***cluster_up.sh*** supplied in this repo that can be used for this process* or do the following:
 
 From `[root@smshost vagrant]#`:
 
@@ -183,9 +249,6 @@ systemctl restart slurmd
 exit
 ```
 
-072 265 5731
-
-
 13. You should be back at login node `[root@smshost vagrant]#`and make sure you get the following:
 
 ```
@@ -214,6 +277,74 @@ sudo sed -i '3d' /etc/hosts
 ```
 
 Now we can start using our cluster and submit jobs!
+
+# Running Jobs
+
+1. First let us create a user profile login called `test` and login to:
+
+From `[root@smshost vagrant]# `:
+
+```
+sudo su - test
+```
+
+You should see:
+
+```
+[test@smshost ]$
+```
+
+From here on we will start using HPC Software Carpentry notes: https://carpentries-incubator.github.io/hpc-intro/10-hpc-intro/index.html
+
+Note on the section: https://carpentries-incubator.github.io/hpc-intro/17-parallel/index.html
+
+To install Amdahl rather follow this process:
+
+Exit to smshost root `[root@smshost vagrant]#` and install the following:
+
+```
+yum install python3-devel
+```
+
+and:
+
+```
+pip3 install --upgrade pip
+```
+
+Go back to `test` user: `sudo su - test` and first create a virtual environment:
+
+```
+python3 -m venv amdahl-env
+```
+
+```
+source amdahl-env/bin/activate
+```
+
+And do the following:
+
+```
+pip install amdahl
+pip install numpy
+```
+
+Now you can start with the section on "Running the Job on a Compute Node".
+
+Script updates:
+
+1. Replace `#SBATCH -p cpubase_bycore_b1` with `#SBATCH -p normal`
+2. Note, for the scripts you don't need to load any modules like: `module load Python` or `module load SciPy-bundle`
+3. The configurations that can Node (-N) and processors (-n) can only be the following:
+
+| Configuration | Description |
+|---------------|-------------|
+| `-N 1 -n 1`   | 1 Node, 1 Task |
+| `-N 1 -n 2`   | 1 Node, 2 Tasks |
+| `-N 2 -n 2`   | 2 Nodes, 2 Tasks |
+| `-N 2 -n 4`   | 2 Nodes, 4 Tasks |
+
+
 
 
 
