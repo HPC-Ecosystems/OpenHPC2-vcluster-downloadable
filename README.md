@@ -53,28 +53,30 @@ cd openhpc-2.x-virtual-lab
 6. Delete the existing Vagrant file with `rm Vagrantfile`
 7. Download the [pre-packaged Vagrant box and Vagrantfile](https://csircoza-my.sharepoint.com/:f:/g/personal/bjohnston_csir_co_za/Elv5PJ6ScCBLmlclV_B7vb4BEdLjkuW-GdPW7iIwfEm_kQ) to the `vcluster` folder
   - `package.box`  
-  - `packaged-openhpc2-smshost.box`  
+  - `openhpc2-smshost-20240724.box`  
   - `Vagrantfile`
   - *NOTE: If a password is required, please use `ohpc2template`*
   - *HINT: You can download the pre-packaged `.box` file to another location if you intend to build multiple machines from the packaged box*
 
 8. Add the pre-built Vagrant box to the Vagrant environment using a syntax similar to `vagrant box add my-box file:///c:/path/to/my-box.box` or as a relative path such as `file://my-box.box.`
 
+From `...openhpc-2.x-virtual-lab/`:
+
 ```
-/vcluster/ vagrant box add openhpc/ohpc2 file://packaged-openhpc2-smshost.box
+vagrant box add openhpc/ohpc2 file://openhpc2-smshost-20240724.box
 ```
 
 9. Once complete (`==> box: Successfully added box 'openhpc/ohpc2' (v0) for 'virtualbox'!`) start the **login** node (referred to as the *smshost*):
 
 ```
-/vcluster/ vagrant up smshost
+vagrant up smshost
 ```
 * HINT: This should show a virtual machine in the VirtualBox GUI with the name `smshost_vcluster`*
 
 10. Now start first compute node 0:
 
 ```
-/vcluster/ vagrant up compute00
+vagrant up compute00
 ```
 
 Ignore `SSH private key issue`
@@ -82,15 +84,32 @@ Ignore `SSH private key issue`
 11. Now start second compute node 1:
 
 ```
-/vcluster/ vagrant up compute01
+vagrant up compute01
 ```
 
 12. Test nodes:
 
+From `[vagrant@smshost2 vagrant]#`:
+
 ```
-/vcluster/ vagrant ssh smshost
-[vagrant@smshost2 vagrant]# sudo su
-[root@smshost2 vagrant]# sudo sinfo
+vagrant ssh smshost
+```
+
+From `[vagrant@smshost vagrant]#`:
+
+```
+sudo su
+```
+
+From `[root@smshost vagrant]#`:
+
+```
+sinfo
+```
+
+Output:
+
+```
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 normal*      up 1-00:00:00      2  down* compute[00-01]
 ```
@@ -101,24 +120,50 @@ The following steps will remove an errant entry that reappears in the compute no
 
 *HINT: There is a script ***cluster_up.sh*** supplied in /vagrant/ that can be used for this process*
 
-`ssh` to both nodes as root and do:
+From `[root@smshost vagrant]#`:
+
+`ssh` to first node as root and do:
 
 ```
-[root@smshost2 vagrant]# ssh compute00
-[root@compute00 ]# sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts"
-[root@compute00 ]# systemctl restart slurmd
+ssh compute00
 ```
 
-```
-[root@smshost2 vagrant]# ssh compute01
-[root@compute00 ]# sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts"
-[root@compute01 ]# systemctl restart slurmd
-```
-
-13. Go back to login node (Ctrl + d) and make sure you get the following:
+From `[root@compute00 ]#`:
 
 ```
-[root@smshost2 vagrant]# sudo sinfo
+sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts
+systemctl restart slurmd
+exit
+```
+
+From `[root@smshost vagrant]#`:
+
+`ssh` to second node as root and do:
+
+```
+ssh compute01
+```
+
+From `[root@compute01 ]#`:
+
+```
+sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts
+systemctl restart slurmd
+exit
+```
+
+072 265 5731
+
+
+13. You should be back at login node `[root@smshost vagrant]#`and make sure you get the following:
+
+```
+sudo sinfo
+```
+
+And get the following:
+
+```
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 normal*      up 1-00:00:00      2   idle compute[00-01]
 ```
@@ -129,26 +174,16 @@ If the `STATE` shows anything else (usually the alternative state is `down`), th
 
 `scontrol update nodename=compute0[0-1] state=resume`
 
-14. Lastly fix a small bug in `/etc/hosts` on each vm:
+14. Lastly fix a small bug in `/etc/hosts` on login node:
+
+From `[root@smshost vagrant]# `:
 
 ```
-[root@smshost2 vagrant]# sudo sed -i '3d' /etc/hosts
-```
-
-```
-[root@compute00 ]# sudo sed -i '3d' /etc/hosts
-```
-
-```
-[root@compute01]# sudo sed -i '3d' /etc/hosts
+sudo sed -i '3d' /etc/hosts
 ```
 
 Now we can start using our cluster and submit jobs!
 
 
-## To Do:
-1. Add links
-2. Add screenshots/code of expected outputs
-3. Show setup with Windows Terminal
 
 
