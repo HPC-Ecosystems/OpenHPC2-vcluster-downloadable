@@ -97,15 +97,21 @@ normal*      up 1-00:00:00      2  down* compute[00-01]
 
 It will be likely that at this stage on first boot both compute nodes will be marked as down. This is to be expected from the virtual environment since the VMs have in effect been in a dormant state since their first original deployment many days/weeks/months ago. We need to restart the HPC services to resume normal HPC service.  
 
+The following steps will remove an errant entry that reappears in the compute node DNS entries that will not be needed for this lab, and then restarts the Slurm workload manager.
+
+*HINT: There is a script ***cluster_up.sh*** supplied in /vagrant/ that can be used for this process*
+
 `ssh` to both nodes as root and do:
 
 ```
 [root@smshost2 vagrant]# ssh compute00
+[root@compute00 ]# sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts"
 [root@compute00 ]# systemctl restart slurmd
 ```
 
 ```
 [root@smshost2 vagrant]# ssh compute01
+[root@compute00 ]# sed -i 's/127.0.1.1 smshost smshost/#127.0.1.1 smshost smshost/' /etc/hosts"
 [root@compute01 ]# systemctl restart slurmd
 ```
 
@@ -118,6 +124,10 @@ normal*      up 1-00:00:00      2   idle compute[00-01]
 ```
 
 The `STATE` should show `idle`.
+
+If the `STATE` shows anything else (usually the alternative state is `down`), then the compute nodes must be brought back to service:
+
+`scontrol update nodename=compute0[0-1] state=resume`
 
 14. Lastly fix a small bug in `/etc/hosts` on each vm:
 
