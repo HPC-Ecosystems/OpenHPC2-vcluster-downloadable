@@ -29,6 +29,10 @@ https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
 2. Install Vagrant
 3. Install Gitbash (if using windows)
 
+Follow the guide here if you want more details on how to install VirtualBox and Vagrant:
+
+https://hpc-ecosystems.gitlab.io/training/openhpc-2.x-guide/2_virtual_lab_setup/
+
 ## Setup 
 
 What you will be building
